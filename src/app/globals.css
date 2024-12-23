@@ -1,33 +1,806 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* General Styling*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  font-family: Georgia, serif;
+  background-color: #f5f5f5;
+  color: #333;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+a {
+  color: #f8eee8;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3 {
+  font-family: Georgia, serif;
+  font-weight: bold;
+}
+
+/* Basic styles for the header */
+.header {
+  background-color: #474444;
+  color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* Logo and Title */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between the logo and the title */
+}
+
+.header .logo {
+  font-size: 28px; /* Increased font size for emphasis */
+  font-style: italic; /* Makes the text italic */
+  font-weight: bold; /* Makes it stand out */
+  color: #da96b8; /* Keeps the text color soft */
+  font-family: "Georgia", serif; /* Adds an elegant font */
+}
+
+.header .nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Links styling */
+.header .nav a {
+  color: #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Pulsate Effect for Links */
+.header .nav a:hover {
+  text-decoration: underline;
+}
+
+/* Icons Section */
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Space between icons */
+}
+
+.header-icons .login {
+  color: #da96b8;
+  font-size: 16px;
+  text-decoration: none;
+  margin-right: 10px;
+  transition: color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Pulsate Effect for Login */
+.header-icons .login:hover {
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Adds a glowing shadow */
+}
+
+/* Icons with Pulsate Effect */
+.header-icons .icon {
+  color: #f7f4f4;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Pulsate Effect for Icons */
+.header-icons .icon:hover {
+  transform: scale(1.2); /* Slight zoom in */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6); /* Glow effect */
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.hamburger .line {
+  width: 25px;
+  height: 3px;
+  background-color: #f8f4f4;
+  transition: transform 0.3s ease;
+}
+
+.hamburger .line.open:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger .line.open:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger .line.open:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Hero Section */
+.hero {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  text-align: center;
+  color: #ffffff; /* White text for contrast */
+  position: relative;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  z-index: 1;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+}
+
+.hero-text h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333333; /* Neutral color for the title */
+  margin-bottom: 15px;
+}
+
+.hero-text p {
+  font-size: 1rem;
+  color: #3f3f3f; /* Light grey for the subtitle */
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.hero-text button {
+  background-color: #4a4e4d; /* Brown button for elegance */
+  color: #fcf9f9;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.hero-text button:hover {
+  background-color: #491337; /* Darker brown on hover */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Adds a glowing shadow */
+  transform: translateY(-2px); /* Creates a slight drop shadow effect */
+}
+
+/* Footer Section */
+
+footer {
+  background-color: #363035; /* Rich dark brown for a luxurious look */
+  color: #f4ebdf; /* Soft off-white for text */
+  padding: 20px; /* Increased padding for better spacing */
+  font-family: Georgia, serif;
+  display: flex;
+  justify-content: space-between; /* Ensures equal space between sections */
+  align-items: center;
+  flex-wrap: wrap; /* Ensures responsiveness on smaller screens */
+  gap: 20px; /* Adds space between rows when wrapping */
+}
+
+footer > div {
+  flex: 1; /* Ensures all sections take up equal width */
+  text-align: center; /* Centers the content in each section */
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: flex-start; /* Align items to the left */
+  gap: 10px, 20px; /* Add space between the lines */
+}
+
+.footer-left p {
+  display: flex;
+  align-items: center; /* Align icons and text horizontally */
+  gap: 8px; /* Space between the icon and the text */
+  font-size: 14px; /* Adjust font size for readability */
+}
+
+.footer-left p a {
+  font-style: italic;
+  text-decoration: underline;
+  color: #f4ebdf; /* Text color */
+  transition: color 0.3s ease;
+}
+
+.footer-left p a:hover {
+  color: #d8b17d; /* Change color on hover */
+}
+
+.footer-left svg {
+  font-size: 18px; /* Adjust icon size */
+  color: #f4ebdf; /* Set icon color to match text */
+  transition: color 0.3s ease;
+}
+
+.footer-left svg:hover {
+  color: #d8b17d; /* Icon color change on hover */
+}
+
+/* Center Section: Copyright and Developer Info */
+.footer-center {
+  text-align: center;
+  flex: 1;
+  margin-bottom: 20px;
+  font-family: Georgia, serif;
+}
+
+.feedback-form {
+  display: flex;
+  flex-direction: row; /* Stack the elements vertically */
+  gap: 15px; /* Space between textarea and button */
+  align-items: center; /* Center align the form elements */
+}
+
+.feedback-section textarea {
+  width: 100%;
+  height: 50px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feedback-section textarea:focus {
+  border-color: #888;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Glowing shadow on focus */
+}
+
+.feedback-form button {
+  background-color: #dbc4aa; /* Button background color */
+  color: #2b1c01; /* White text color */
+  padding: 12px 20px; /* Padding for button */
+  border: none;
+  border-radius: 8px; /* Rounded corners */
+  font-size: 16px; /* Font size for the button */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease;
+}
+
+.feedback-form button:hover {
+  background-color: #c7c6c3; /* Change button color on hover */
+}
+/* Right Section: Social Media Links */
+.footer-right {
+  text-align: right;
+  flex: 1;
+  margin-bottom: 20px;
+  font-family: Georgia, serif;
+}
+
+.footer-right .social-icons {
+  display: flex;
+  justify-content: flex-end; /* Align to the right */
+  gap: 15px; /* Space between icons */
+}
+
+.footer-right a {
+  color: #f4ebdf;
+  font-size: 18px;
+  transition: transform 0.3s ease, color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Space between text and icon */
+  text-decoration: none;
+}
+
+.footer-right a:hover {
+  color: #d8b17d; /* Gold hover effect */
+  transform: scale(1.1); /* Zoom effect */
+}
+
+.footer-right svg {
+  font-size: 22px;
+}
+
+/* Hover Effects for Entire Footer */
+footer:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Subtle shadow effect */
+  transition: box-shadow 0.3s ease;
+}
+
+/* About Styling */
+.about {
+  background-size: cover;
+  background-position: center;
+  padding: 40px 20px;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-content,
+.mission-vision,
+.core-values {
+  background: rgba(
+    255,
+    255,
+    255,
+    0.85
+  ); /* Light background overlay for readability */
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  width: 100%;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #7c483c; /* A warm color tone for headings */
+  text-align: center;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  text-align: justify;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  padding-left: 20px;
+  position: relative;
+}
+
+ul li::before {
+  content: "✔"; /* Checkmark for the list items */
+  position: absolute;
+  left: 0;
+  color: #7a493e;
+  font-size: 1.2rem;
+}
+
+/* Animation for Fade-in Effect */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Basic styling for the product */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+.product-card {
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px); /* Slight lift effect on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+.product-image {
+  width: 100%; /* Ensure image scales well with the card */
+  height: 350px;
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px solid #ddd; /* Add border below image */
+}
+
+.product-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #5a3d29; /* Slightly darker color for readability */
+}
+
+.product-price {
+  font-size: 16px;
+  color: #7a4b2d; /* More pronounced brown color */
+  margin-bottom: 15px;
+}
+
+.add-to-cart-button {
+  padding: 12px 24px;
+  background-color: #b86c59;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-to-cart-button:hover {
+  background-color: #a07145;
+  transform: scale(1.05); /* Slight scale-up effect on hover */
+}
+
+.add-to-cart-button:active {
+  background-color: #8f6332; /* Darker shade on click */
+  transform: scale(1); /* Reset scale when button is clicked */
+}
+
+/* Cart info section */
+.cart-info {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Cart info section */
+.cart-info {
+  margin-top: 20px;
+  text-align: center;
+  color: #333;
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+/* Contact section */
+
+.contact-form {
+  margin: 20px auto; /* Center the form horizontally */
+  padding: 20px;
+  max-width: 700px; /* Limit width for better readability */
+  background: rgba(
+    255,
+    255,
+    255,
+    0.85
+  ); /* Light background overlay for readability */
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+  font-size: 1.5rem; /* Slightly larger font size for better emphasis */
+  margin-bottom: 15px; /* Increased spacing below the heading */
+  text-align: center; /* Center-align the heading */
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Add consistent spacing between form elements */
+}
+
+input,
+textarea {
+  padding: 10px; /* Added padding for better usability */
+  border: 1px solid #ccc; /* Light border for clarity */
+  border-radius: 5px; /* Rounded corners for a cohesive design */
+  font-size: 1rem;
+}
+
+textarea {
+  min-height: 120px; /* Slightly increased height for a better writing area */
+}
+
+label {
+  font-size: 1rem;
+  font-weight: bold; /* Added weight to make labels more visible */
+  margin-bottom: 5px;
+}
+
+button {
+  padding: 12px 24px;
+  background-color: #b86c59;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold; /* Emphasized button text */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #a07145;
+  transform: scale(1.05); /* Slight scale-up effect on hover */
+}
+
+/* Responsive Design contact */
+
+/* For Small Screens (max-width: 600px) */
+@media (max-width: 600px) {
+  .contact-form {
+    padding: 15px; /* Reduce padding for smaller screens */
+    width: 90%; /* Use most of the screen width */
+  }
+
+  h3 {
+    font-size: 1.2rem; /* Slightly smaller heading size for small screens */
+    text-align: center; /* Center align the heading */
+  }
+
+  input,
+  textarea {
+    font-size: 0.9rem; /* Adjust font size for smaller screens */
+    padding: 8px; /* Reduced padding for smaller screens */
+  }
+
+  button {
+    font-size: 14px; /* Adjust button font size */
+    padding: 10px 20px; /* Reduced padding for smaller buttons */
+  }
+}
+
+/* For Medium Screens (max-width: 900px) */
+@media (max-width: 900px) {
+  .contact-form {
+    padding: 20px; /* Keep padding consistent but limit the width */
+    max-width: 80%; /* Form takes up 80% of the screen width */
+  }
+
+  h3 {
+    font-size: 1.4rem; /* Slightly smaller heading for medium screens */
+  }
+
+  input,
+  textarea {
+    font-size: 1rem; /* Slight adjustment for medium screens */
+    padding: 10px;
+  }
+
+  button {
+    font-size: 15px; /* Slight adjustment for button text */
+    padding: 12px 24px;
+  }
+}
+
+/* Responsive product styling for small screens */
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: 1fr; /* 1 card per row */
+  }
+
+  .product-card {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+/* Larger screens (above 768px) */
+@media (min-width: 769px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+  }
+}
+
+/* Responsive About */
+
+/* Small Devices (Phones) */
+@media (max-width: 768px) {
+  .about {
+    padding: 20px 10px;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  ul li {
+    font-size: 0.9rem;
+  }
+}
+
+/* Medium Devices (Tablets) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  h2 {
+    font-size: 1.9rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  ul li {
+    font-size: 1rem;
+  }
+}
+
+/* Large Devices (Desktops) */
+@media (min-width: 1025px) {
+  .about-content,
+  .mission-vision,
+  .core-values {
+    padding: 30px;
+    max-width: 900px; /* Larger width for bigger screens */
+  }
+
+  h2 {
+    font-size: 2.2rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+  }
+
+  ul li {
+    font-size: 1.1rem;
+  }
+}
+
+/* Responsive NavBar */
+@media (max-width: 768px) {
+  .nav,
+  .header-icons {
+    display: none; /* Hide navigation links and icons on small screens */
+  }
+
+  .hamburger {
+    display: flex; /* Show hamburger icon */
+  }
+
+  .nav.active {
+    display: flex; /* Show navigation menu when active */
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: #d8b17d;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+  }
+
+  .nav.active a {
+    color: #fff; /* Change link color for better visibility */
+  }
+
+  .header-left {
+    justify-content: center; /* Center logo on smaller screens */
+  }
+  .header .nav {
+    display: none; /* Hide nav links on mobile */
+    flex-direction: column;
+    width: 100%;
+    background-color: #d8b17d; /* Match header background */
+  }
+
+  .header .nav.open {
+    display: flex; /* Show nav links when hamburger is clicked */
+  }
+
+  .hamburger {
+    display: flex; /* Show hamburger on mobile */
+  }
+}
+
+/* Responsive Hero Section */
+@media (max-width: 768px) {
+  /* Medium screens */
+  .hero {
+    height: 80vh; /* Adjust height for medium screens */
+    justify-content: center; /* Center content for better alignment */
+    padding: 20px; /* Add padding for spacing */
+  }
+
+  .hero-text h1 {
+    font-size: 2rem; /* Reduce title size */
+  }
+
+  .hero-text p {
+    font-size: 0.9rem; /* Slightly reduce subtitle size */
+  }
+
+  .hero-text button {
+    font-size: 12px; /* Adjust button font size */
+    padding: 12px 18px; /* Adjust button padding */
+  }
+}
+
+@media (max-width: 576px) {
+  /* Small screens */
+  .hero {
+    height: auto; /* Allow the hero section to adjust height based on content */
+    flex-direction: column; /* Stack elements vertically */
+    text-align: center; /* Center text alignment */
+    padding: 15px; /* Add more padding for spacing */
+  }
+
+  .hero-text h1 {
+    font-size: 1.8rem; /* Further reduce title size */
+    margin-bottom: 10px;
+  }
+
+  .hero-text p {
+    font-size: 0.85rem; /* Further reduce subtitle size */
+    margin-bottom: 15px;
+  }
+
+  .hero-text button {
+    font-size: 11px; /* Adjust button font size for small screens */
+    padding: 10px 15px; /* Adjust button padding */
+  }
+}
+
+/* Media Queries for Responsive footer */
+@media (max-width: 768px) {
+  .footer-left,
+  .footer-center,
+  .footer-right {
+    flex: 1 1 100%; /* Make sections full width */
+    text-align: center; /* Center-align content */
+    margin-bottom: 20px; /* Add spacing between sections */
+  }
+
+  .footer-left {
+    align-items: center; /* Center align on smaller screens */
+  }
+
+  .footer-right .social-icons {
+    justify-content: center; /* Center social icons */
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-left p {
+    font-size: 12px; /* Adjust font size for smaller screens */
+  }
+
+  .footer-center p {
+    font-size: 14px; /* Reduce font size for smaller screens */
+  }
+
+  .feedback-form {
+    flex-direction: column; /* Stack textarea and button vertically */
+    gap: 10px; /* Reduce gap */
+  }
+
+  .feedback-form button {
+    width: 100%; /* Make button full width */
   }
 }
