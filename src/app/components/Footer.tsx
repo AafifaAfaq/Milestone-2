@@ -30,7 +30,7 @@ export const Footer = () => {
 
       {/* Center Section */}
       <div className="footer-center">
-        <ul>
+        <ul className="footer-ul">
           <li
             style={{
               display: "flex",

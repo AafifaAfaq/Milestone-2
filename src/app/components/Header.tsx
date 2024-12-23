@@ -33,6 +33,7 @@ export const Header = () => {
         <span className={isMenuOpen ? "line open" : "line"}></span>
       </div>
 
+
       {/* Navigation Links */}
       <nav className={`nav ${isMenuOpen ? "active" : ""}`}>
         <Link href="/">Home</Link>
